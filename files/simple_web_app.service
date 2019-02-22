@@ -1,0 +1,9 @@
+[Unit]
+Description=Simple Web App
+
+[Service]
+ExecStart=/etc/simple_web_app.sh
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target
