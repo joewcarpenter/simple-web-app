@@ -4,7 +4,7 @@ This is a working POC to provision a simple web application in AWS, using Cloudf
 
 The web-app itself is a simple Python application (using Flask) serving static content over http, deployed into an autoscaling group behind an ALB. Access to servers is available via a Bastion instance, which is powered down after creation.
 
-By default, :80 to the ALB and :22 to the Bastion are exposed over the internet (hence the Bastion is powered down), which can be overridden on l.7 of driver.py
+By default, :80 to the ALB and :22 to the Bastion are exposed over the internet (hence the Bastion is powered down), which can be overridden using the `--allowedingress` option.
 
 #### Assumptions
 
