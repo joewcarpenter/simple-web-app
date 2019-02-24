@@ -58,4 +58,6 @@ class BaseLayer(Ec2, Vpc):
                     ChangeSetName=change_set_name,
                     StackName=stack_name,
                 )
+            else:
+                print('Unexpected error encountered: {}\n\n'.format(e.response))
 
