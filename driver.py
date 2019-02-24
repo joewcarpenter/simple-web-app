@@ -28,13 +28,18 @@ class SimpleWebApp(BaseLayer):
         self.private_routing_table = 'PrivateRouting'
         self.private_subnet = 'PrivateSubnet'
         self.keypair = keypair_name
+        # Cast ingress IP to list if not otherwise
+        if isinstance(allowed_ingress, list):
+            self.allowed_ingress = allowed_ingress
+        elif isinstance(allowed_ingress, str):
+            self.allowed_ingress = [allowed_ingress]
 
         # Security group definitions
         self.sgs = {
             "BastionSG": {
                 'ingress': {
                     'tcp': {
-                        '22': allowed_ingress,
+                        '22': self.allowed_ingress,
                     }
                 },
                 'egress': {}
@@ -42,7 +47,7 @@ class SimpleWebApp(BaseLayer):
             "LBSG": {
                 'ingress': {
                     'tcp': {
-                        '80': allowed_ingress,
+                        '80': self.allowed_ingress,
                         '22': [Ref('BastionSG')]
                     }
                 },

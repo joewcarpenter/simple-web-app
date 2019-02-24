@@ -9,13 +9,18 @@ By default, :80 to the ALB and :22 to the Bastion are exposed over the internet 
 #### Assumptions
 
 - Valid AWS account, credentials etc.
-- Pre-existing key pair with name: _simple-webapp-key-pair_
-- No existing CFN stack with the name: simple-webapp-stack (because any change sets are automatically executed)
+- Pre-existing key pair available to user
 - User has access to the CFN console to retrieve the DNS for the ALB (stack output - key:SimpleWebAppAlbDNS)
 
 #### Deployment
 
-`python driver.py`
+```
+python driver.py \
+--stackname <STACK_NAME> \
+--keypair <KEY_PAIR> \
+--region <AWS_REGION> \
+--allowedingress <MY_IP_ADDRESS>
+```
 -> This will create the infrastructure, configure the application and start it up - nothing else is required.
 
 
@@ -26,8 +31,5 @@ By default, :80 to the ALB and :22 to the Bastion are exposed over the internet 
 - Use SSL! Generate proper certs etc.
 - Automatically provision the key pair
 - Implement secure HA back-end eg. RDS (although this noddy app doesn't need it...!)
-- Comments in the code + better documentation generally
 - Network diagram in README.md
-- General project structure cleanup
 - More feedback to user's CLI - currently the user will have to go to the CFN console for progress and DNS
-- ... etc!

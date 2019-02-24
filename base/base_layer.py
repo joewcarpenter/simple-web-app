@@ -1,12 +1,13 @@
 from modules.EC2 import Ec2
 from modules.VPC import Vpc
+from modules.RDS import Rds
 from troposphere import Ref, Template
 import datetime
 import boto3
 import botocore
 
 
-class BaseLayer(Ec2, Vpc):
+class BaseLayer(Ec2, Vpc, Rds):
     def __init__(self, **kwargs):
         self.template = Template()
         self.ref_stack_id = Ref('AWS::StackId')
